@@ -26,6 +26,10 @@ module Lannister
   class << self
     attr_writer :trade_repo
 
+    def configure
+      yield self
+    end
+
     def trade_repo
       @trade_repo ||= Repositories::TradeRepo.new
       #@trade_repo ||= Accounting::TradeRepo
