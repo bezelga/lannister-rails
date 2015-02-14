@@ -18,7 +18,10 @@ module Lannister
       end
 
       def balance(account_id:)
-        rows.select{ |_, row| row.account_id == account_id }.map{ |_, row| row.amount }.reduce(:+) || 0
+        rows
+          .select{ |_, row| row.account_id == account_id }
+          .map{ |_, row| row.amount }
+          .reduce(:+) || 0
       end
 
       def delete_all

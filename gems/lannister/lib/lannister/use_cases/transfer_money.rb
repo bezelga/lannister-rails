@@ -18,22 +18,24 @@ module Lannister
       end
 
       def transfer
-        if get_balance(account_id: source_account_id) >= amount
-          transaction_repo.persist(debit_transaction)
-          transaction_repo.persist(credit_transaction)
-        else
-          false
-        end
+        return false if source_account_balance < amount
+
+        debit_source_account
+        credit_destination_account
       end
 
       private
 
-      def debit_transaction
-        Entities::Transaction.new(account_id: source_account_id, amount: - amount)
+      def source_account_balance
+        get_balance(account_id: source_account_id)
       end
 
-      def credit_transaction
-        Entities::Transaction.new(account_id: destination_account_id, amount: amount)
+      def debit_source_account
+        transaction_repo.persist Entities::Transaction.new(account_id: source_account_id, amount: - amount)
+      end
+
+      def credit_destination_account
+        transaction_repo.persist Entities::Transaction.new(account_id: destination_account_id, amount: amount)
       end
 
       attr_reader :source_account_id, :destination_account_id, :amount
