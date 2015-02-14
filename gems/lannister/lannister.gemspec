@@ -8,8 +8,8 @@ Gem::Specification.new do |spec|
   spec.version       = Lannister::VERSION
   spec.authors       = ["Fabiano Beselga"]
   spec.email         = ["fabianobeselga@gmail.com"]
-  spec.summary       = %q{TODO: Write a short summary. Required.}
-  spec.description   = %q{TODO: Write a longer description. Optional.}
+  spec.summary       = %q{ PoC of an accounting system using Clean Architecture}
+  spec.description   = spec.summary
   spec.homepage      = ""
   spec.license       = "MIT"
 

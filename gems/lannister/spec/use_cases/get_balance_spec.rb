@@ -3,8 +3,8 @@ require 'spec_helper'
 module Lannister
   module UseCases
     describe GetBalance do
-      describe '.execute' do
-        subject(:execute) { described_class.execute(account_id: account_id) }
+      describe '.get_balance' do
+        subject(:get_balance) { described_class.get_balance(account_id: account_id) }
 
         let(:account_id) { 1 }
         let(:amount) { 10_000 }
@@ -13,7 +13,7 @@ module Lannister
         context 'when there is only one credit transaction' do
           before { Lannister.transaction_repo.persist(transaction) }
 
-          it { expect(execute).to eq(amount) }
+          it { expect(get_balance).to eq(amount) }
         end
 
         context 'when there are two credit transactions' do
@@ -21,7 +21,7 @@ module Lannister
           let(:another_transaction) { Entities::Transaction.new(account_id: account_id, amount: another_amount) }
           before { [transaction, another_transaction].each { |t| Lannister.transaction_repo.persist(t) } }
 
-          it { expect(execute).to eq(amount + another_amount) }
+          it { expect(get_balance).to eq(amount + another_amount) }
         end
 
         context 'when there is a credit and a debit' do
@@ -29,7 +29,7 @@ module Lannister
           let(:debit_transaction) { Entities::Transaction.new(account_id: account_id, amount: debit_amount) }
           before { [transaction, debit_transaction].each { |t| Lannister.transaction_repo.persist(t) } }
 
-          it { expect(execute).to eq(amount + debit_amount) }
+          it { expect(get_balance).to eq(amount + debit_amount) }
         end
 
         context 'transactions from another accounts' do
@@ -38,7 +38,7 @@ module Lannister
           before { [transaction, debit_transaction].each { |t| Lannister.transaction_repo.persist(t) } }
 
           it 'ignores them' do
-            expect(execute).to eq(amount)
+            expect(get_balance).to eq(amount)
           end
         end
       end

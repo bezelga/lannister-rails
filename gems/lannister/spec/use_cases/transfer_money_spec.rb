@@ -4,9 +4,9 @@ module Lannister
   module UseCases
     describe TransferMoney do
       describe '.transfer' do
-        subject(:transfer) { described_class.execute(source_account_id: source_account_id,
-                                                     destination_account_id: destination_account_id,
-                                                     amount: amount ) }
+        subject(:transfer) { described_class.transfer_money(source_account_id: source_account_id,
+                                                            destination_account_id: destination_account_id,
+                                                            amount: amount ) }
         let(:source_account_id) { 1 }
         let(:destination_account_id) { 2 }
         let(:amount) { 1_000 }
@@ -18,6 +18,7 @@ module Lannister
         context 'when there is enough money on the source account' do
           let(:previous_transaction) { Entities::Transaction.new(account_id: source_account_id,
                                                                amount: amount) }
+
           before { Lannister.transaction_repo.persist(previous_transaction) }
 
           it 'debits the specified amount from source account' do

@@ -7,7 +7,7 @@ PATH
 PATH
   remote: gems/lannister
   specs:
-    lannister (0.0.1)
+    lannister (0.0.1.alpha)
       caze
 
 GEM

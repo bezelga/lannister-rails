@@ -1,4 +1,5 @@
 require 'caze'
+require 'forwardable'
 
 module Lannister
   module UseCases

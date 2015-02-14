@@ -3,6 +3,7 @@ require 'lannister/version'
 require 'lannister/entities/transaction'
 require 'lannister/repositories/transaction_repo'
 
+#require 'lannister/use_cases'
 require 'lannister/use_cases/get_balance'
 require 'lannister/use_cases/transfer_money'
 
@@ -18,8 +19,6 @@ require 'caze'
 
 module Lannister
   include Caze
-  # this will call the class method transfer_money inside the
-  # DOUBT: what if it was execute?
   define_use_cases transfer_money: UseCases::TransferMoney,
                    get_balance:    UseCases::GetBalance
 

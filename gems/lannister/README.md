@@ -20,7 +20,24 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+Transfer money:
+
+```ruby
+Lannister.transfer_money(source_account_id: 42,
+                        destination_account_id: 22,
+                        amount: 100_000)
+```
+
+Get balance:
+
+```ruby
+Lannister.get_balance(account_id: 42)
+```
+
+## TODO
+
+* print money use case (a.k.a credit)
+* explain about the repository
 
 ## Contributing
 
