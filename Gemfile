@@ -1,6 +1,7 @@
 source 'https://rubygems.org'
 
 gem 'lannister', path: 'gems/lannister'
+gem 'accounting', path: 'engines/accounting'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.0'

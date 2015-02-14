@@ -1,0 +1,18 @@
+<p>Balance: <%= number_to_currency @balance %></p>
+
+<%= form_for :transfer_money, url: transfer_money_path do |f| %>
+  <%= f.label :source_account_id %>
+  <%= f.select :source_account_id, @accounts %>
+
+  <br />
+
+  <%= f.label :destination_account_id %>
+  <%= f.select :destination_account_id, @accounts %>
+
+  <br />
+  <%= f.label :amount %>
+  <%= f.text_field :amount %>
+
+  <br />
+  <%= f.submit 'Transfer money!' %>
+<% end %>

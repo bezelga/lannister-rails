@@ -1,4 +1,10 @@
 PATH
+  remote: engines/accounting
+  specs:
+    accounting (0.0.1)
+      rails (~> 4.2.0)
+
+PATH
   remote: gems/lannister
   specs:
     lannister (0.0.1)
@@ -158,6 +164,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  accounting!
   byebug
   jbuilder (~> 2.0)
   jquery-rails

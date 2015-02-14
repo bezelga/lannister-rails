@@ -20,20 +20,13 @@ module Lannister
   include Caze
   # this will call the class method transfer_money inside the
   # DOUBT: what if it was execute?
-  define_use_cases transfer_money: UseCases::TransferMoney
+  define_use_cases transfer_money: UseCases::TransferMoney,
+                   get_balance:    UseCases::GetBalance
 
   extend Forwardable
 
   class << self
-    #def transfer_money(source_account_id:, destination_account_id:, amount:)
-      #UseCases::TransferMoney.execute(source_account_id: source_account_id,
-                                      #destination_account_id: destination_account_id,
-                                      #amount: amount)
-    #end
-
-    def get_balance(account_id:)
-      UseCases::GetBalance.execute(account_id: account_id)
-    end
+    attr_writer :transaction_repo
 
     def transaction_repo
       @transaction_repo ||= Repositories::TransactionRepo.new

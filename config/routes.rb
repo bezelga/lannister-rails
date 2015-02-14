@@ -1,9 +1,11 @@
 Rails.application.routes.draw do
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
+  #
+  resource :transfer_money, only: [:new, :create], controller: 'transfer_money'
 
   # You can have the root of your site routed with "root"
-  # root 'welcome#index'
+  root 'transfer_money#new'
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
