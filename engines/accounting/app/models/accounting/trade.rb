@@ -1,5 +1,5 @@
 module Accounting
-  class Transaction < ActiveRecord::Base
+  class Trade < ActiveRecord::Base
     belongs_to :account
   end
 end

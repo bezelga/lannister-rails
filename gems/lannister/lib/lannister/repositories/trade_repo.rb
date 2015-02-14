@@ -1,6 +1,6 @@
 module Lannister
   module Repositories
-    class TransactionRepo
+    class TradeRepo
       def initialize
         @rows = {}
         @id = 0

@@ -16,16 +16,16 @@ module Lannister
         end
 
         context 'when there is enough money on the source account' do
-          let(:previous_transaction) { Entities::Transaction.new(account_id: source_account_id,
+          let(:previous_trade) { Entities::Trade.new(account_id: source_account_id,
                                                                amount: amount) }
 
-          before { Lannister.transaction_repo.persist(previous_transaction) }
+          before { Lannister.trade_repo.persist(previous_trade) }
 
-          it 'debits the specified amount from source account' do
+          it 'debits the source account' do
             expect{ transfer }.to change{ get_balance(source_account_id) }.by(- amount)
           end
 
-          it 'credits the specific amount to destination account' do
+          it 'credits the destination account' do
             expect{ transfer }.to change{ get_balance(destination_account_id) }.by(amount)
           end
         end

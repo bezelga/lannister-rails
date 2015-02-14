@@ -8,34 +8,34 @@ module Lannister
 
         let(:account_id) { 1 }
         let(:amount) { 10_000 }
-        let(:transaction) { Entities::Transaction.new(account_id: account_id, amount: amount) }
+        let(:trade) { Entities::Trade.new(account_id: account_id, amount: amount) }
 
-        context 'when there is only one credit transaction' do
-          before { Lannister.transaction_repo.persist(transaction) }
+        context 'when there is only one credit Trade' do
+          before { Lannister.trade_repo.persist(trade) }
 
           it { expect(get_balance).to eq(amount) }
         end
 
-        context 'when there are two credit transactions' do
+        context 'when there are two credit Trades' do
           let(:another_amount) { 2_200 }
-          let(:another_transaction) { Entities::Transaction.new(account_id: account_id, amount: another_amount) }
-          before { [transaction, another_transaction].each { |t| Lannister.transaction_repo.persist(t) } }
+          let(:another_trade) { Entities::Trade.new(account_id: account_id, amount: another_amount) }
+          before { [trade, another_trade].each { |t| Lannister.trade_repo.persist(t) } }
 
           it { expect(get_balance).to eq(amount + another_amount) }
         end
 
         context 'when there is a credit and a debit' do
           let(:debit_amount) { -500 }
-          let(:debit_transaction) { Entities::Transaction.new(account_id: account_id, amount: debit_amount) }
-          before { [transaction, debit_transaction].each { |t| Lannister.transaction_repo.persist(t) } }
+          let(:debit_trade) { Entities::Trade.new(account_id: account_id, amount: debit_amount) }
+          before { [trade, debit_trade].each { |t| Lannister.trade_repo.persist(t) } }
 
           it { expect(get_balance).to eq(amount + debit_amount) }
         end
 
-        context 'transactions from another accounts' do
+        context 'Trades from another accounts' do
           let(:debit_amount) { -500 }
-          let(:debit_transaction) { Entities::Transaction.new(account_id: 33, amount: debit_amount) }
-          before { [transaction, debit_transaction].each { |t| Lannister.transaction_repo.persist(t) } }
+          let(:debit_trade) { Entities::Trade.new(account_id: 33, amount: debit_amount) }
+          before { [trade, debit_trade].each { |t| Lannister.trade_repo.persist(t) } }
 
           it 'ignores them' do
             expect(get_balance).to eq(amount)

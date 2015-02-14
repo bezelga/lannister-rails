@@ -1,6 +1,6 @@
 module Lannister
   module Entities
-    class Transaction
+    class Trade
       attr_accessor :id, :account_id, :amount
 
       def initialize(attributes = {})

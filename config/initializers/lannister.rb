@@ -1,2 +1,2 @@
-Lannister.transaction_repo = Accounting::TransactionRepo
+Lannister.trade_repo = Accounting::TradeRepo
 Lannister.transaction_handler = ActiveRecord::Base
