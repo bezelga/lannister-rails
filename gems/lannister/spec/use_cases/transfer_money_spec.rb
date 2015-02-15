@@ -15,29 +15,37 @@ module Lannister
           Lannister.get_balance(account_id: account_id)
         end
 
-        context 'when there is enough money on the source account' do
-          let(:previous_trade) { Entities::Trade.new(account_id: source_account_id,
-                                                               amount: amount) }
+        def source_account_balance
+          get_balance(source_account_id)
+        end
 
-          before { Lannister.trade_repo.persist(previous_trade) }
+        def destination_account_balance
+          get_balance(destination_account_id)
+        end
+
+        context 'enough money to transfer' do
+          before do
+            Entities::Factory.fabricate_trade(account_id: source_account_id,
+                                              amount: amount)
+          end
 
           it 'debits the source account' do
-            expect{ transfer }.to change{ get_balance(source_account_id) }.by(- amount)
+            expect{ transfer }.to change{ source_account_balance }.by(- amount)
           end
 
           it 'credits the destination account' do
-            expect{ transfer }.to change{ get_balance(destination_account_id) }.by(amount)
+            expect{ transfer }.to change{ destination_account_balance }.by(amount)
           end
         end
 
-        context 'there is not  enough money on source account' do
-          it 'cancels the transfer by responding false' do
+        context 'not enough money to transfer' do
+          it 'cancels the transfer and responds false' do
             expect(transfer).to eq(false)
           end
 
           it 'does not change the accounts balance' do
-            expect{ transfer }.to_not change{ get_balance(source_account_id) }
-            expect{ transfer }.to_not change{ get_balance(destination_account_id) }
+            expect{ transfer }.to_not change{ source_account_balance }
+            expect{ transfer }.to_not change{ destination_account_balance }
           end
         end
       end

@@ -1,5 +1,6 @@
 require 'lannister'
 require 'pry'
+require 'lannister/entities/factory'
 
 # WITH the engine dependency
 #ActiveRecord::Base.establish_connection(database: ":memory:", adapter: "sqlite3")
