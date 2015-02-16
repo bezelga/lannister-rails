@@ -1,14 +1,14 @@
-#module Lannister
-  #module Entities
-    #class Trade
-      #attr_accessor :id, :account_id, :amount, :date
+module Lannister
+  module Entities
+    class Trade
+      attr_accessor :id, :account_id, :amount, :date
 
-      #def initialize(attributes = {})
-        #@id, @account_id, @amount, @date = attributes.values_at(:id, :account_id, :amount, :date)
-      #end
-    #end
-  #end
-#end
+      def initialize(attributes = {})
+        @id, @account_id, @amount, @date = attributes.values_at(:id, :account_id, :amount, :date)
+      end
+    end
+  end
+end
 
 require 'active_model'
 

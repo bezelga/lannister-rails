@@ -1,3 +1,5 @@
+require 'active_support/core_ext/enumerable'
+
 module Lannister
   module Repositories
     class TradeRepo
@@ -18,10 +20,7 @@ module Lannister
       end
 
       def balance(account_id:)
-        rows
-          .select{ |_, row| row.account_id == account_id }
-          .map{ |_, row| row.amount }
-          .reduce(:+) || 0
+        rows_by_account(account_id).sum { |_, r| r.amount }
       end
 
       def delete_all
@@ -32,6 +31,10 @@ module Lannister
       private
 
       attr_reader :rows
+
+      def rows_by_account(account_id)
+        rows.select{ |_, row| row.account_id == account_id }
+      end
     end
   end
 end

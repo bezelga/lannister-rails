@@ -25,4 +25,5 @@ Gem::Specification.new do |spec|
 
   spec.add_dependency "caze", ">= 0.0.3"
   spec.add_dependency "activemodel"
+  spec.add_dependency "activesupport"
 end
