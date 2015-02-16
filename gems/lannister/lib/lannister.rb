@@ -6,17 +6,10 @@ require 'lannister/repositories/trade_repo'
 #require 'lannister/use_cases'
 require 'lannister/use_cases/get_balance'
 require 'lannister/use_cases/transfer_money'
-
-# WITH the engine dependency
-# TODO: move the requires to the engine, as eager load
-#require 'rails/railties'
-#require 'active_record'
-#require 'accounting'
-#require 'accounting/engine'
-#require "#{Accounting::Engine.root}/app/models/accounting/trade"
-#require "#{Accounting::Engine.root}/app/repositories/accounting/trade_repo"
-
 require 'caze'
+
+require 'accounting/engine'
+
 
 module Lannister
   include Caze
@@ -32,8 +25,8 @@ module Lannister
     end
 
     def trade_repo
-      @trade_repo ||= Repositories::TradeRepo.new
-      #@trade_repo ||= Accounting::TradeRepo
+      #@trade_repo ||= Repositories::TradeRepo.new
+      @trade_repo ||= Accounting::TradeRepo
     end
   end
 end

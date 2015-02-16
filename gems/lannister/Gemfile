@@ -1,12 +1,12 @@
 source 'https://rubygems.org'
 
-#gem 'rails', '~> 4.2.0'
-#gem 'railties'
-#gem 'accounting', path: '../../engines/accounting'
+gem 'rails', '~> 4.2.0'
+gem 'railties'
+gem 'accounting', path: '../../engines/accounting'
 
-#group :test do
-  #gem 'sqlite3'
-#end
+group :test do
+  gem 'sqlite3'
+end
 
 # Specify your gem's dependencies in lannister.gemspec
 gemspec
