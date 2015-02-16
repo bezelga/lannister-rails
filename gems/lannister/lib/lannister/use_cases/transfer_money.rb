@@ -1,3 +1,20 @@
+# Transfer Money - use case
+#
+# Data:
+# <source_account_id>, <destination_account_id>, <amount>
+#
+# Primary course:
+#
+#  1. Client triggers “Transfer Money” with above data.
+#  2. System validates all data.
+#  3. System creates a debit on the source account.
+#  4. System creates a credit on the destination account.
+#
+# Exception Course: Not enough money on the source account.
+#
+#  1. System cancels the transfer.
+#
+
 require 'caze'
 require 'forwardable'
 
@@ -5,7 +22,8 @@ module Lannister
   module UseCases
     class TransferMoney
       include Caze
-      define_entry_point :transfer, as: :transfer_money#, use_transaction: true
+
+      export :transfer, as: :transfer_money
 
       extend Forwardable
       def_delegators :Lannister, :get_balance, :trade_repo

@@ -23,5 +23,6 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency "rspec"
   spec.add_development_dependency "pry"
 
-  spec.add_dependency "caze"
+  spec.add_dependency "caze", ">= 0.0.3"
+  spec.add_dependency "activemodel"
 end

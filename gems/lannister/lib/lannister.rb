@@ -20,8 +20,9 @@ require 'caze'
 
 module Lannister
   include Caze
-  define_use_cases get_balance:    UseCases::GetBalance,
-                   transfer_money: UseCases::TransferMoney
+
+  has_use_case :get_balance, UseCases::GetBalance
+  has_use_case :transfer_money, UseCases::GetBalance, transactional: true
 
   class << self
     attr_writer :trade_repo
